@@ -131,7 +131,7 @@ fn save_kx_hint(sess: &mut ClientSessionImpl, dns_name: &str, group: NamedGroup)
 fn randomise_sessionid_for_ticket(csv: &mut persist::ClientSessionValue) {
     if csv.ticket.len() > 0 {
         let mut random_id = [0u8; 32];
-        rand::fill_random(&mut random_id);
+        rand::fill_public_random(&mut random_id);
         csv.session_id = SessionID::new(&random_id);
     }
 }

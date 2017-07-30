@@ -171,7 +171,7 @@ impl SessionRandoms {
             server: [0u8; 32],
         };
 
-        rand::fill_random(&mut ret.server);
+        rand::fill_public_random(&mut ret.server);
         ret
     }
 
@@ -182,7 +182,7 @@ impl SessionRandoms {
             server: [0u8; 32],
         };
 
-        rand::fill_random(&mut ret.client);
+        rand::fill_public_random(&mut ret.client);
         ret
     }
 }

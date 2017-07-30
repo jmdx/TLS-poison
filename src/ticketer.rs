@@ -38,7 +38,7 @@ impl AEADTicketer {
     /// Make a ticketer with recommended configuration and a random key.
     pub fn new() -> AEADTicketer {
         let mut key = [0u8; 32];
-        rand::fill_random(&mut key);
+        rand::fill_private_random(&mut key);
         AEADTicketer::new_custom(&aead::CHACHA20_POLY1305, &key, 60 * 60 * 12)
     }
 }
@@ -55,7 +55,7 @@ impl ProducesTickets for AEADTicketer {
     fn encrypt(&self, message: &[u8]) -> Option<Vec<u8>> {
         // Random nonce, because a counter is a privacy leak.
         let mut nonce = [0u8; 12];
-        rand::fill_random(&mut nonce);
+        rand::fill_public_random(&mut nonce);
 
         let mut out = Vec::new();
         out.extend_from_slice(&nonce);

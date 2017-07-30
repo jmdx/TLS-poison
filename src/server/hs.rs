@@ -1548,7 +1548,7 @@ impl ExpectTLS13Finished {
         }
 
         let ticket = maybe_ticket.unwrap();
-        let age_add = rand::random_u32(); // nb, we don't do 0-RTT data, so whatever
+        let age_add = rand::random_public_u32(); // nb, we don't do 0-RTT data, so whatever
         let payload = NewSessionTicketPayloadTLS13::new(ticket_lifetime, age_add, ticket);
         let m = Message {
             typ: ContentType::Handshake,

@@ -190,7 +190,7 @@ impl ServerSessionMemoryCache {
 impl StoresServerSessions for ServerSessionMemoryCache {
     fn generate(&self) -> SessionID {
         let mut v = [0u8; 32];
-        rand::fill_random(&mut v);
+        rand::fill_public_random(&mut v);
         SessionID::new(&v)
     }
 
