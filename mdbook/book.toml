@@ -1,0 +1,6 @@
+[book]
+authors = ["Joseph Birr-Pixton"]
+language = "en"
+multilingual = false
+src = "src"
+title = "rustls Documentation"
