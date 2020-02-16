@@ -2,5 +2,5 @@
 
 [Introduction](./intro.md)
 
-- [Review of implementation vulnerabilties](./impl-vulns.md)
-- [Review of TLS protocol vulnerabilties](./proto-vulns.md)
+- [Review of implementation vulnerabilities](./impl-vulns.md)
+- [Review of TLS protocol vulnerabilities](./proto-vulns.md)

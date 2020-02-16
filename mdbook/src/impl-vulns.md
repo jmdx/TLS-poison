@@ -62,8 +62,41 @@ struct ExpectTraffic {
 Since this state requires a value of these types, it will be a compile-time error to
 reach that state without performing the requisite security-critical operations.
 
-This approach is not infallable, but it has zero runtime cost.
+This approach is not infallible, but it has zero runtime cost.
 
-## State machine attacks: EarlyCCS and SKIP
+## State machine attacks: EarlyCCS and SMACK/SKIP/FREAK
 
+EarlyCCS [CVE-2014-0224](https://nvd.nist.gov/vuln/detail/CVE-2014-0224) was a vulnerability in OpenSSL
+found in 2014.  The TLS `ChangeCipherSpec` message would be processed at inappropriate times, leading
+to data being encrypted with the wrong keys (specifically, keys which were not secret).  This resulted
+from OpenSSL taking a *reactive* strategy to incoming messages ("when I get a message X, I should do Y")
+which allows it to diverge from the proper state machine under attacker control.
+
+[SMACK](https://mitls.org/pages/attacks/SMACK) is a similar suite of vulnerabilities found in JSSE,
+CyaSSL, OpenSSL, Mono and axTLS.  "SKIP-TLS" demonstrated that some implementations allowed handshake
+messages (and in one case, the entire handshake!) to be skipped leading to breaks in security.  "FREAK"
+found that some implementations incorrectly allowed export-only state transitions (ie, transitions that
+were only valid when an export ciphersuite was in use).
+
+rustls represents its protocol state machine carefully to avoid these defects.  We model the handshake,
+CCS and application data subprotocols in the same single state machine.  Each state in this machine is
+represented with a single struct, and transitions are modelled as functions that consume the current state
+plus one TLS message[^1] and return a struct representing the next state.  These functions fully validate
+the message type before further operations.
+
+A sample sequence for a full TLSv1.2 handshake by a client looks like:
+
+- `hs::ExpectServerHello` (nb. ClientHello is logically sent before this state); transition to `tls12::ExpectCertificate`
+- `tls12::ExpectCertificate`; transition to `tls12::ExpectServerKX`
+- `tls12::ExpectServerKX`; transition to `tls12::ExpectServerDoneOrCertReq`
+- `tls12::ExpectServerDoneOrCertReq`; delegates to `tls12::ExpectCertificateRequest` or `tls12::ExpectServerDone` depending on incoming message.
+  - `tls12::ExpectServerDone`; transition to `tls12::ExpectCCS`
+- `tls12::ExpectCCS`; transition to `tls12::ExpectFinished`
+- `tls12::ExpectFinished`; transition to `tls12::ExpectTraffic`
+- `tls12::ExpectTraffic`; terminal state; transitions to `tls12::ExpectTraffic`
+
+In the future we plan to formally prove that all possible transitions modelled in this system of types
+are correct with respect to the standard(s).  At the moment we rely merely on exhaustive testing.
+
+[^1]: a logical TLS message: post-decryption, post-fragmentation.
 
