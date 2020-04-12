@@ -1,18 +1,21 @@
+
+go:
+- "1.14"
+
 language: rust
-group: edge
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: bionic
       sudo: required
       rust: stable
     - os: linux
-      dist: trusty
+      dist: bionic
       sudo: required
       rust: nightly
       env: COVERAGE=1
     - os: linux
-      dist: trusty
+      dist: bionic
       sudo: required
       rust: nightly
       script:
@@ -25,7 +28,7 @@ before_install:
   - if [[ "$COVERAGE" == "1" ]]; then admin/build-lcov ; fi
   - if [[ "$COVERAGE" == "1" ]]; then gem install coveralls-lcov ; fi
   - if [[ "$COVERAGE" == "1" ]]; then rustup install stable ; fi
-  - if [[ "$COVERAGE" == "1" ]]; then sudo apt-get install libclang-common-3.8-dev llvm-3.8-dev ; fi
+  - if [[ "$COVERAGE" == "1" ]]; then sudo apt-get install libclang-common-8-dev llvm-8-dev ; fi
 script:
   - cargo build
   - RUST_BACKTRACE=1 cargo test
