@@ -1,0 +1,20 @@
+version: '3'
+services:
+  custom-tls:
+    build: .
+    ports:
+    - "8443:8443"
+    volumes:
+    - .:/code
+    links:
+    - redis
+  custom-dns:
+    build: client-hello-poisoning/custom-dns
+    ports:
+    - "5353:53"
+    volumes:
+    - .:/code
+    links:
+    - redis
+  redis:
+    image: redis

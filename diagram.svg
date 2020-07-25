@@ -1,0 +1,376 @@
+<svg id="mermaid-1558570228143" width="100%" xmlns="http://www.w3.org/2000/svg" height="100%" style="max-width:1050px;" viewBox="-50 -10 1050 699" class="mermaid"><style>
+
+
+#mermaid-1558570228143 .label {
+  font-family: 'trebuchet ms', verdana, arial;
+  color: #333; }
+
+#mermaid-1558570228143 .node rect,
+#mermaid-1558570228143 .node circle,
+#mermaid-1558570228143 .node ellipse,
+#mermaid-1558570228143 .node polygon {
+  fill: #eee;
+  stroke: #999;
+  stroke-width: 1px; }
+
+#mermaid-1558570228143 .node.clickable {
+  cursor: pointer; }
+
+#mermaid-1558570228143 .arrowheadPath {
+  fill: #333333; }
+
+#mermaid-1558570228143 .edgePath .path {
+  stroke: #666;
+  stroke-width: 1.5px; }
+
+#mermaid-1558570228143 .edgeLabel {
+  background-color: white; }
+
+#mermaid-1558570228143 .cluster rect {
+  fill: #eaf2fb !important;
+  stroke: #26a !important;
+  stroke-width: 1px !important; }
+
+#mermaid-1558570228143 .cluster text {
+  fill: #333; }
+
+#mermaid-1558570228143 div.mermaidTooltip {
+  position: absolute;
+  text-align: center;
+  max-width: 200px;
+  padding: 2px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 12px;
+  background: #eaf2fb;
+  border: 1px solid #26a;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 100; }
+
+#mermaid-1558570228143 .actor {
+  stroke: #999;
+  fill: #eee; }
+
+#mermaid-1558570228143 text.actor {
+  fill: #333;
+  stroke: none; }
+
+#mermaid-1558570228143 .actor-line {
+  stroke: #666; }
+
+#mermaid-1558570228143 .messageLine0 {
+  stroke-width: 1.5;
+  stroke-dasharray: '2 2';
+  stroke: #333; }
+
+#mermaid-1558570228143 .messageLine1 {
+  stroke-width: 1.5;
+  stroke-dasharray: '2 2';
+  stroke: #333; }
+
+#mermaid-1558570228143 #arrowhead {
+  fill: #333; }
+
+#mermaid-1558570228143 #crosshead path {
+  fill: #333 !important;
+  stroke: #333 !important; }
+
+#mermaid-1558570228143 .messageText {
+  fill: #333;
+  stroke: none; }
+
+#mermaid-1558570228143 .labelBox {
+  stroke: #999;
+  fill: #eee; }
+
+#mermaid-1558570228143 .labelText {
+  fill: white;
+  stroke: none; }
+
+#mermaid-1558570228143 .loopText {
+  fill: white;
+  stroke: none; }
+
+#mermaid-1558570228143 .loopLine {
+  stroke-width: 2;
+  stroke-dasharray: '2 2';
+  stroke: #999; }
+
+#mermaid-1558570228143 .note {
+  stroke: #777700;
+  fill: #ffa; }
+
+#mermaid-1558570228143 .noteText {
+  fill: black;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 14px; }
+
+#mermaid-1558570228143 .activation0 {
+  fill: #f4f4f4;
+  stroke: #666; }
+
+#mermaid-1558570228143 .activation1 {
+  fill: #f4f4f4;
+  stroke: #666; }
+
+#mermaid-1558570228143 .activation2 {
+  fill: #f4f4f4;
+  stroke: #666; }
+
+
+#mermaid-1558570228143 .section {
+  stroke: none;
+  opacity: 0.2; }
+
+#mermaid-1558570228143 .section0 {
+  fill: #80b3e6; }
+
+#mermaid-1558570228143 .section2 {
+  fill: #80b3e6; }
+
+#mermaid-1558570228143 .section1,
+#mermaid-1558570228143 .section3 {
+  fill: white;
+  opacity: 0.2; }
+
+#mermaid-1558570228143 .sectionTitle0 {
+  fill: #333; }
+
+#mermaid-1558570228143 .sectionTitle1 {
+  fill: #333; }
+
+#mermaid-1558570228143 .sectionTitle2 {
+  fill: #333; }
+
+#mermaid-1558570228143 .sectionTitle3 {
+  fill: #333; }
+
+#mermaid-1558570228143 .sectionTitle {
+  text-anchor: start;
+  font-size: 11px;
+  text-height: 14px; }
+
+
+#mermaid-1558570228143 .grid .tick {
+  stroke: #e6e6e6;
+  opacity: 0.3;
+  shape-rendering: crispEdges; }
+
+#mermaid-1558570228143 .grid path {
+  stroke-width: 0; }
+
+
+#mermaid-1558570228143 .today {
+  fill: none;
+  stroke: #d42;
+  stroke-width: 2px; }
+
+
+
+#mermaid-1558570228143 .task {
+  stroke-width: 2; }
+
+#mermaid-1558570228143 .taskText {
+  text-anchor: middle;
+  font-size: 11px; }
+
+#mermaid-1558570228143 .taskTextOutsideRight {
+  fill: #333;
+  text-anchor: start;
+  font-size: 11px; }
+
+#mermaid-1558570228143 .taskTextOutsideLeft {
+  fill: #333;
+  text-anchor: end;
+  font-size: 11px; }
+
+
+#mermaid-1558570228143 .taskText0,
+#mermaid-1558570228143 .taskText1,
+#mermaid-1558570228143 .taskText2,
+#mermaid-1558570228143 .taskText3 {
+  fill: white; }
+
+#mermaid-1558570228143 .task0,
+#mermaid-1558570228143 .task1,
+#mermaid-1558570228143 .task2,
+#mermaid-1558570228143 .task3 {
+  fill: #26a;
+  stroke: #1a4d80; }
+
+#mermaid-1558570228143 .taskTextOutside0,
+#mermaid-1558570228143 .taskTextOutside2 {
+  fill: #333; }
+
+#mermaid-1558570228143 .taskTextOutside1,
+#mermaid-1558570228143 .taskTextOutside3 {
+  fill: #333; }
+
+
+#mermaid-1558570228143 .active0,
+#mermaid-1558570228143 .active1,
+#mermaid-1558570228143 .active2,
+#mermaid-1558570228143 .active3 {
+  fill: #eee;
+  stroke: #1a4d80; }
+
+#mermaid-1558570228143 .activeText0,
+#mermaid-1558570228143 .activeText1,
+#mermaid-1558570228143 .activeText2,
+#mermaid-1558570228143 .activeText3 {
+  fill: #333 !important; }
+
+
+#mermaid-1558570228143 .done0,
+#mermaid-1558570228143 .done1,
+#mermaid-1558570228143 .done2,
+#mermaid-1558570228143 .done3 {
+  stroke: #666;
+  fill: #bbb;
+  stroke-width: 2; }
+
+#mermaid-1558570228143 .doneText0,
+#mermaid-1558570228143 .doneText1,
+#mermaid-1558570228143 .doneText2,
+#mermaid-1558570228143 .doneText3 {
+  fill: #333 !important; }
+
+
+#mermaid-1558570228143 .crit0,
+#mermaid-1558570228143 .crit1,
+#mermaid-1558570228143 .crit2,
+#mermaid-1558570228143 .crit3 {
+  stroke: #b1361b;
+  fill: #d42;
+  stroke-width: 2; }
+
+#mermaid-1558570228143 .activeCrit0,
+#mermaid-1558570228143 .activeCrit1,
+#mermaid-1558570228143 .activeCrit2,
+#mermaid-1558570228143 .activeCrit3 {
+  stroke: #b1361b;
+  fill: #eee;
+  stroke-width: 2; }
+
+#mermaid-1558570228143 .doneCrit0,
+#mermaid-1558570228143 .doneCrit1,
+#mermaid-1558570228143 .doneCrit2,
+#mermaid-1558570228143 .doneCrit3 {
+  stroke: #b1361b;
+  fill: #bbb;
+  stroke-width: 2;
+  cursor: pointer;
+  shape-rendering: crispEdges; }
+
+#mermaid-1558570228143 .doneCritText0,
+#mermaid-1558570228143 .doneCritText1,
+#mermaid-1558570228143 .doneCritText2,
+#mermaid-1558570228143 .doneCritText3 {
+  fill: #333 !important; }
+
+#mermaid-1558570228143 .activeCritText0,
+#mermaid-1558570228143 .activeCritText1,
+#mermaid-1558570228143 .activeCritText2,
+#mermaid-1558570228143 .activeCritText3 {
+  fill: #333 !important; }
+
+#mermaid-1558570228143 .titleText {
+  text-anchor: middle;
+  font-size: 18px;
+  fill: #333; }
+
+#mermaid-1558570228143 g.classGroup text {
+  fill: #999;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 10px; }
+
+#mermaid-1558570228143 g.classGroup rect {
+  fill: #eee;
+  stroke: #999; }
+
+#mermaid-1558570228143 g.classGroup line {
+  stroke: #999;
+  stroke-width: 1; }
+
+#mermaid-1558570228143 .classLabel .box {
+  stroke: none;
+  stroke-width: 0;
+  fill: #eee;
+  opacity: 0.5; }
+
+#mermaid-1558570228143 .classLabel .label {
+  fill: #999;
+  font-size: 10px; }
+
+#mermaid-1558570228143 .relation {
+  stroke: #999;
+  stroke-width: 1;
+  fill: none; }
+
+#mermaid-1558570228143 #compositionStart {
+  fill: #999;
+  stroke: #999;
+  stroke-width: 1; }
+
+#mermaid-1558570228143 #compositionEnd {
+  fill: #999;
+  stroke: #999;
+  stroke-width: 1; }
+
+#mermaid-1558570228143 #aggregationStart {
+  fill: #eee;
+  stroke: #999;
+  stroke-width: 1; }
+
+#mermaid-1558570228143 #aggregationEnd {
+  fill: #eee;
+  stroke: #999;
+  stroke-width: 1; }
+
+#mermaid-1558570228143 #dependencyStart {
+  fill: #999;
+  stroke: #999;
+  stroke-width: 1; }
+
+#mermaid-1558570228143 #dependencyEnd {
+  fill: #999;
+  stroke: #999;
+  stroke-width: 1; }
+
+#mermaid-1558570228143 #extensionStart {
+  fill: #999;
+  stroke: #999;
+  stroke-width: 1; }
+
+#mermaid-1558570228143 #extensionEnd {
+  fill: #999;
+  stroke: #999;
+  stroke-width: 1; }
+
+#mermaid-1558570228143 .commit-id,
+#mermaid-1558570228143 .commit-msg,
+#mermaid-1558570228143 .branch-label {
+  fill: lightgrey;
+  color: lightgrey; }
+</style><style>#mermaid-1558570228143 {
+    color: rgb(46, 46, 46);
+    font: ;
+  }</style><g></g><g><line id="actor0" x1="75" y1="5" x2="75" y2="688" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="0" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="75" y="32.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="75" dy="0">Phishing page</tspan></text></g><g><line id="actor1" x1="275" y1="5" x2="275" y2="688" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="200" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="275" y="32.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="275" dy="0">Client</tspan></text></g><g><line id="actor2" x1="475" y1="5" x2="475" y2="688" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="400" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="475" y="32.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="475" dy="0">DNS</tspan></text></g><g><line id="actor3" x1="675" y1="5" x2="675" y2="688" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="600" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="675" y="32.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="675" dy="0">Custom TLS Server</tspan></text></g><g><line id="actor4" x1="875" y1="5" x2="875" y2="688" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="800" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="875" y="32.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="875" dy="0">Client port 11211</tspan></text></g><defs><marker id="arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"></path></marker></defs><defs><marker id="crosshead" markerWidth="15" markerHeight="8" orient="auto" refX="16" refY="4"><path fill="black" stroke="#000000" style="stroke-dasharray: 0, 0;" stroke-width="1px" d="M 9,2 V 6 L16,4 Z"></path><path fill="none" stroke="#000000" style="stroke-dasharray: 0, 0;" stroke-width="1px" d="M 0,1 L 6,7 M 6,1 L 0,7"></path></marker></defs><g><text x="175" y="93" style="text-anchor: middle;" class="messageText">(On port 443) HTML with fetch('https://ssltest.jmaddux.com:11211')</text><line x1="75" y1="100" x2="275" y2="100" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="175" y="153" style="text-anchor: middle;" class="messageText">Load https://ssltest.jmaddux.com:11211</text><line x1="75" y1="160" x2="275" y2="160" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="375" y="188" style="text-anchor: middle;" class="messageText">Where is ssltest.jmaddux.com?</text><line x1="275" y1="195" x2="475" y2="195" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="375" y="223" style="text-anchor: middle;" class="messageText">Address of Custom TLS Server, TTL=0 seconds</text><line x1="475" y1="230" x2="275" y2="230" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="475" y="258" style="text-anchor: middle;" class="messageText">Client Hello</text><line x1="275" y1="265" x2="675" y2="265" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="475" y="293" style="text-anchor: middle;" class="messageText">Server Hello, session_id=Payload N</text><line x1="675" y1="300" x2="275" y2="300" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="475" y="328" style="text-anchor: middle;" class="messageText">(TLS stuff)</text><line x1="275" y1="335" x2="675" y2="335" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;"></line></g><g><text x="475" y="363" style="text-anchor: middle;" class="messageText">301 redirect to https://ssltest.jmaddux.com:11211</text><line x1="675" y1="370" x2="275" y2="370" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="175" y="398" style="text-anchor: middle;" class="messageText">Load https://ssltest.jmaddux.com:11211</text><line x1="75" y1="405" x2="275" y2="405" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="375" y="433" style="text-anchor: middle;" class="messageText">Where is ssltest.jmaddux.com?</text><line x1="275" y1="440" x2="475" y2="440" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="375" y="468" style="text-anchor: middle;" class="messageText">127.0.0.1, TTL=0 seconds</text><line x1="475" y1="475" x2="275" y2="475" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="575" y="503" style="text-anchor: middle;" class="messageText">Payload1 was delivered to Client</text><line x1="475" y1="510" x2="675" y2="510" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><text x="575" y="538" style="text-anchor: middle;" class="messageText">Client Hello, session_id=Payload N</text><line x1="275" y1="545" x2="875" y2="545" class="messageLine0" stroke-width="2" stroke="black" style="fill: none;" marker-end="url(#arrowhead)"></line></g><g><rect x="200" y="555" fill="#EDF2AE" stroke="#666" width="150" height="38" rx="0" ry="0" class="note"></rect><text x="196" y="579" fill="black" class="noteText"><tspan x="216" fill="black">TLS Error</tspan></text></g><g><line x1="65" y1="110" x2="885" y2="110" class="loopLine"></line><line x1="885" y1="110" x2="885" y2="603" class="loopLine"></line><line x1="65" y1="603" x2="885" y2="603" class="loopLine"></line><line x1="65" y1="110" x2="65" y2="603" class="loopLine"></line><polygon points="65,110 115,110 115,123 106.6,130 65,130" class="labelBox"></polygon><text x="72.5" y="125" fill="black" class="labelText"><tspan x="72.5" fill="black">loop</tspan></text><text x="475" y="125" style="text-anchor: middle;" fill="black" class="loopText"><tspan x="475" fill="black">[ Loop over N ]</tspan></text></g><g><rect x="0" y="623" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="75" y="655.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="75" dy="0">Phishing page</tspan></text></g><g><rect x="200" y="623" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="275" y="655.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="275" dy="0">Client</tspan></text></g><g><rect x="400" y="623" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="475" y="655.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="475" dy="0">DNS</tspan></text></g><g><rect x="600" y="623" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="675" y="655.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="675" dy="0">Custom TLS Server</tspan></text></g><g><rect x="800" y="623" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="875" y="655.5" style="text-anchor: middle; font-family: &quot;Open-Sans&quot;, &quot;sans-serif&quot;;" dominant-baseline="central" alignment-baseline="central" class="actor"><tspan x="875" dy="0">Client port 11211</tspan></text></g><text class="source" display="none">sequenceDiagram
+  Phishing page-&gt;&gt;Client: (On port 443) HTML with fetch('https://ssltest.jmaddux.com:11211')
+loop Loop over N
+  Phishing page-&gt;&gt;Client: Load https://ssltest.jmaddux.com:11211
+  Client-&gt;&gt;DNS: Where is ssltest.jmaddux.com?
+  DNS-&gt;&gt;Client: Address of Custom TLS Server, TTL=0 seconds
+  Client-&gt;&gt;Custom TLS Server: Client Hello
+  Custom TLS Server-&gt;&gt;Client: Server Hello, session_id=Payload N
+  Client-&gt;Custom TLS Server: (TLS stuff)
+  Custom TLS Server-&gt;&gt;Client: 301 redirect to https://ssltest.jmaddux.com:11211 
+  Phishing page-&gt;&gt;Client: Load https://ssltest.jmaddux.com:11211
+  Client-&gt;&gt;DNS: Where is ssltest.jmaddux.com?
+  DNS-&gt;&gt;Client: 127.0.0.1, TTL=0 seconds
+  DNS-&gt;&gt;Custom TLS Server: Payload1 was delivered to Client
+  Client-&gt;&gt;Client port 11211: Client Hello, session_id=Payload N
+  Note over Client: TLS Error
+end</text></svg>
