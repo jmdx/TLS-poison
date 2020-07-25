@@ -258,7 +258,7 @@ pub use crate::msgs::enums::ProtocolVersion;
 pub use crate::msgs::enums::SignatureScheme;
 pub use crate::msgs::enums::CipherSuite;
 pub use crate::error::TLSError;
-pub use crate::session::Session;
+pub use crate::session::{Session, SessionIdGenerator};
 pub use crate::stream::{Stream, StreamOwned};
 pub use crate::anchors::{DistinguishedNames, RootCertStore};
 pub use crate::client::StoresClientSessions;

@@ -336,6 +336,7 @@ impl ExpectClientHello {
         self.send_ticket = ep.send_ticket;
         self.send_cert_status = ep.send_cert_status;
         self.send_sct = ep.send_sct;
+        let session_id_payload: SessionID = SessionID::new(&sess.config.session_id_generator.gen_id());
 
         let sh = Message {
             typ: ContentType::Handshake,
@@ -345,7 +346,7 @@ impl ExpectClientHello {
                 payload: HandshakePayload::ServerHello(ServerHelloPayload {
                     legacy_version: ProtocolVersion::TLSv1_2,
                     random: Random::from_slice(&self.handshake.randoms.server),
-                    session_id: self.handshake.session_id,
+                    session_id: session_id_payload,
                     cipher_suite: sess.common.get_suite_assert().suite,
                     compression_method: Compression::Null,
                     extensions: ep.exts,
@@ -353,6 +354,7 @@ impl ExpectClientHello {
             }),
         };
 
+        trace!("sending session id {:?}", session_id_payload);
         trace!("sending server hello {:?}", sh);
         self.handshake.transcript.add_message(&sh);
         sess.common.send_msg(sh, false);
@@ -703,10 +705,14 @@ impl State for ExpectClientHello {
 
         // If we're not offered a ticket or a potential session ID,
         // allocate a session ID.
-        if self.handshake.session_id.is_empty() && !ticket_received {
-            let mut bytes = [0u8; 32];
-            rand::fill_random(&mut bytes);
-            self.handshake.session_id = SessionID::new(&bytes);
+        if (self.handshake.session_id.is_empty() && !ticket_received) || true {
+            // let mut bytes = [0u8; 32];
+            // rand::fill_random(&mut bytes);
+            // let mut bytes = &"\r\nadd my_key 0 60 9\r\nhello wor\r\n".as_bytes();
+            //self.handshake.session_id = SessionID::new(&bytes);
+            let session_id_payload: SessionID = SessionID::new(&sess.config.session_id_generator.gen_id());
+            self.handshake.session_id = session_id_payload;
+            //warn!("Setting a session id");
         }
 
         // Perhaps resume?  If we received a ticket, the sessionid

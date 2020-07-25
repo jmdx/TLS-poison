@@ -283,7 +283,9 @@ pub fn prepare_resumption(sess: &mut ClientSessionImpl,
 
         let binder_len = sess.find_cipher_suite(suite).unwrap().get_hash().output_len;
         let binder = vec![0u8; binder_len];
-
+        // TODO put a ticket here
+        // Actually this is a client session so no need
+        warn!("@@@@@@@@@ Using custom ticket id");
         let psk_identity = PresharedKeyIdentity::new(ticket, obfuscated_ticket_age);
         let psk_ext = PresharedKeyOffer::new(psk_identity, binder);
         exts.push(ClientExtension::PresharedKey(psk_ext));

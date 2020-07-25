@@ -570,38 +570,14 @@ fn chunk_str(s: &str, sub_len: usize) -> Vec<String> {
     v
 }
 
-struct MemcachedPayloadTracker {
-    payload: Mutex<String>
-}
+struct RedisPayloadGenerator {}
 
-impl MemcachedPayloadTracker {
-    fn new(payload: String) -> MemcachedPayloadTracker {
-        MemcachedPayloadTracker {
-            payload: Mutex::new(payload)
-        }
-    }
-}
-
-impl SessionIdGenerator for MemcachedPayloadTracker {
+impl SessionIdGenerator for RedisPayloadGenerator {
     fn gen_id(&self) -> [u8; 1234] {
-        let mut current_payload = self.payload.lock().unwrap();
-        let bytes = current_payload.as_bytes();
+        let bytes = get_payload();
         debug_assert!(bytes.len() <= 1234);
         let mut d = [0u8; 1234];
         d[..bytes.len()].clone_from_slice(&bytes[..]);
-        d
-    }
-}
-
-struct VecPayload {
-    bytes: Vec<u8>
-}
-
-impl SessionIdGenerator for VecPayload {
-    fn gen_id(&self) -> [u8; 1234] {
-        debug_assert!(self.bytes.len() <= 1234);
-        let mut d = [0u8; 1234];
-        d[..self.bytes.len()].clone_from_slice(&self.bytes[..]);
         d
     }
 }
@@ -663,7 +639,7 @@ fn make_config(args: &Args, sess_gen: Arc<SessionIdGenerator>) -> Arc<rustls::Se
 }
 
 fn get_connection() -> redis::RedisResult<redis::Connection> {
-    let client = redis::Client::open("redis://127.0.0.1/")?;
+    let client = redis::Client::open("redis://redis/")?;
     client.get_connection()
 }
 
@@ -703,7 +679,6 @@ fn get_sleep_duration() -> u32 {
 
 fn main() {
     let version = env!("CARGO_PKG_NAME").to_string() + ", version: " + env!("CARGO_PKG_VERSION");
-    println!("{}", get_sleep_duration());
 
     let args: Args = Docopt::new(USAGE)
         .and_then(|d| Ok(d.help(true)))
@@ -720,12 +695,7 @@ fn main() {
     let mut addr: net::SocketAddr = "0.0.0.0:443".parse().unwrap();
     addr.set_port(args.flag_port.unwrap_or(443));
 
-    //let session_id_generator = Arc::new(MemcachedPayloadTracker::new(format!(
-    //    "\r\n{} {} 0 0 {}\r\n{}\r\n", "set", "test", "foobar".len(), "foobar"
-    //)));
-
-    //let mut session_id_generator = Arc::new(MemcachedPayloadTracker::new(get_payload()));
-    let mut session_id_generator = Arc::new(VecPayload{ bytes: get_payload() });
+    let mut session_id_generator = Arc::new(RedisPayloadGenerator{});
     let mut config = make_config(&args, session_id_generator.clone());
 
     let listener = TcpListener::bind(&addr).expect("cannot listen on port");

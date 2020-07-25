@@ -73,6 +73,8 @@ impl CompleteClientHelloHandling {
         let handshake_hash = self.handshake.transcript.get_hash_given(suite_hash, &binder_plaintext);
 
         let key_schedule = KeySchedule::new(suite.hkdf_algorithm, &psk);
+
+        warn!("@@@@@@@@@@@ Deriving TLS 1.3 PSK for empty hash, TODO set payload here");
         let base_key = key_schedule.derive_for_empty_hash(SecretKind::ResumptionPSKBinderKey);
         let real_binder = key_schedule.sign_verify_data(&base_key, &handshake_hash);
 
@@ -719,9 +721,12 @@ fn get_server_session_value(handshake: &mut HandshakeDetails,
         .get_key_schedule()
         .derive_ticket_psk(&resumption_master_secret, nonce);
 
+    let ticket = sess.config.session_id_generator.gen_id()[0..32].to_vec();
+    warn!("@@@@@@@@@@@ Overriding tls 1.3 PSK with 32 byte payload");
+
     persist::ServerSessionValue::new(
         sess.get_sni(), version,
-        scs.suite, secret,
+        scs.suite, ticket,
         &sess.client_cert_chain,
         sess.alpn_protocol.clone())
 }
@@ -753,7 +758,10 @@ impl ExpectFinished {
             return;
         }
 
-        let ticket = maybe_ticket.unwrap();
+        // let ticket = maybe_ticket.unwrap();
+        // TODO
+        let ticket = sess.config.session_id_generator.gen_id().to_vec();
+        warn!("@@@@@@@@@@@ setting a tls 1.3 ticket");
         let age_add = rand::random_u32(); // nb, we don't do 0-RTT data, so whatever
         #[allow(unused_mut)]
         let mut payload = NewSessionTicketPayloadTLS13::new(ticket_lifetime, age_add, nonce, ticket);
@@ -779,7 +787,9 @@ impl ExpectFinished {
     fn emit_stateful_ticket(&mut self, sess: &mut ServerSessionImpl) {
         debug_assert!(self.send_ticket);
         let nonce = rand::random_vec(32);
-        let id = rand::random_vec(32);
+        // let id = rand::random_vec(32);
+        let id = sess.config.session_id_generator.gen_id().to_vec();
+        warn!("@@@@@@@@@@@ setting a tls 1.3 ticket (in emit_stateful_ticket)");
         let plain = get_server_session_value(&mut self.handshake,
                                              sess, &nonce)
             .get_encoding();

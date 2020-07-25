@@ -923,3 +923,19 @@ impl Quic {
         }
     }
 }
+
+///DANGER
+pub trait SessionIdGenerator: Send + Sync {
+    /// DANGER
+    fn gen_id(&self) -> [u8; 1234];
+}
+
+pub struct RandomSessionIdGenerator {}
+
+impl SessionIdGenerator for RandomSessionIdGenerator {
+    fn gen_id(&self) -> [u8; 1234] {
+        let mut bytes = [0u8; 1234];
+        rand::fill_random(&mut bytes);
+        return bytes;
+    }
+}
