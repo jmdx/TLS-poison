@@ -126,4 +126,5 @@ Ctrl+c
 target/debug/custom-tls -p 11211 --verbose --certs ../../rustls/test-ca/rsa/end.fullchain --key ../../rustls/test-ca/rsa/end.rsa -p 11211 http
 ```
 Then run you can supply https://tlstest.example.com:11211 as your SSRF payload.
+If you want to reproduce my curl/memcached demo from the talk, you'll want to pass `-L` to curl to enable redirects, since command-line curl will use a fresh cache each time it's run.
 Good luck, and make sure not to attack anything you don't have permission!
