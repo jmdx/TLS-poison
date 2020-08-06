@@ -1,4 +1,5 @@
 # TLS Poison
+[YouTube link to presentation](https://youtube.com/watch?v=qGpAJxfADjo)
 
 A tool that allows for generic SSRF via TLS, as well as CSRF via image tags
 in most browsers.  The goals are similar to
