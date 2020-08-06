@@ -92,7 +92,7 @@ dns.example.com A 300 <DNS_IP>
 tlstest.example.com NS 300 dns.example.com
 ```
 Then to get a TLS certificate for `tlstest.example.com`, go to the
-[certbot instructions] and complete a DNS challenge for it.  Then, go back to
+[certbot DNS instructions](https://certbot.eff.org/docs/using.html#dns-plugins) and complete a DNS challenge for it.  Then, go back to
 `custom-tls` and rerun it:
 ```bash
 target/debug/custom-tls  -p 8443--verbose --certs letsencrypt-cert.fullchain --key letsencrypt-key.rsa http
