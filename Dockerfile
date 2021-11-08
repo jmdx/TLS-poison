@@ -11,4 +11,4 @@ RUN cargo install --path .
 ENV CERTS /app/rustls/test-ca/rsa/end.fullchain
 ENV KEY /app/rustls/test-ca/rsa/end.rsa
 
-CMD ["sh", "-c", "/usr/local/cargo/bin/custom-tls --verbose --certs $CERTS --key $KEY -p 8443 http"]
+CMD ["sh", "-c", "/usr/local/cargo/bin/custom-tls --verbose --certs $CERTS --key $KEY -p 443 http"]

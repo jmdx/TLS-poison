@@ -3,7 +3,7 @@ services:
   custom-tls:
     build: .
     ports:
-    - "8443:8443"
+    - "443:443"
     volumes:
     - .:/code
     - /etc/letsencrypt/live/ssltest.jmaddux.com:/certs/live/ssltest.jmaddux.com:ro
@@ -16,7 +16,7 @@ services:
   custom-dns:
     build: client-hello-poisoning/custom-dns
     ports:
-    - "5353:53"
+    - "53:53/udp"
     environment:
     - INITIAL_IP=198.51.100.1
     - DOMAIN=ssltest.jmaddux.com
