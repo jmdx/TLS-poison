@@ -6,12 +6,21 @@ services:
     - "8443:8443"
     volumes:
     - .:/code
+    - /etc/letsencrypt/live/ssltest.jmaddux.com:/certs/live/ssltest.jmaddux.com:ro
+    - /etc/letsencrypt/archive/ssltest.jmaddux.com:/certs/archive/ssltest.jmaddux.com:ro
+    environment:
+    - CERTS=/certs/live/ssltest.jmaddux.com/fullchain.pem
+    - KEY=/certs/live/ssltest.jmaddux.com/privkey.pem
     links:
     - redis
   custom-dns:
     build: client-hello-poisoning/custom-dns
     ports:
     - "5353:53"
+    environment:
+    - INITIAL_IP=198.51.100.1
+    - DOMAIN=ssltest.jmaddux.com
+    - TARGET_IP=127.0.0.1
     volumes:
     - .:/code
     links:
