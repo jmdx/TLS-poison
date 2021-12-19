@@ -15,6 +15,6 @@ COPY . /app
 
 RUN pip install -r requirements.txt
 
-EXPOSE 53
+EXPOSE 53/udp
 
-CMD ["sh", "-c", "python alternate-dns.py ${DOMAIN},${TARGET_IP} -b 0.0.0.0 -t ${INITIAL_IP} -d 8.8.8.8"]
+CMD ["sh", "-c", "python -u alternate-dns.py ${DOMAIN},${TARGET_IP} -b 0.0.0.0 -t ${INITIAL_IP} -d 8.8.8.8"]

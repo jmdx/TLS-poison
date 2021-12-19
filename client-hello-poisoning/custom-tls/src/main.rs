@@ -316,7 +316,7 @@ impl Connection {
 
     fn send_http_response_once(&mut self) {
         let response = format!(
-            "HTTP/1.1 301 Moved Permanently\r\nAccess-Control-Allow-Origin: *\r\nLocation: {}\r\nConnection: close\r\n",
+            "HTTP/1.1 301 Moved Permanently\r\nAccess-Control-Allow-Origin: *\r\nLocation: {}\r\nConnection: close\r\n\r\n",
             get_redirect_location()
         );
         std::thread::sleep_ms(get_sleep_duration());

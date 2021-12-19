@@ -8,4 +8,7 @@ WORKDIR /app/client-hello-poisoning/custom-tls
 RUN cargo build
 RUN cargo install --path .
 
-CMD ["/usr/local/cargo/bin/custom-tls", "--verbose", "--certs", "/app/rustls/test-ca/rsa/end.fullchain", "--key", "/app/rustls/test-ca/rsa/end.rsa", "-p", "8443", "http"]
+ENV CERTS /app/rustls/test-ca/rsa/end.fullchain
+ENV KEY /app/rustls/test-ca/rsa/end.rsa
+
+CMD ["sh", "-c", "/usr/local/cargo/bin/custom-tls --verbose --certs $CERTS --key $KEY -p 443 http"]
