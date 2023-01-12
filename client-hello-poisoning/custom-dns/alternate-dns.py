@@ -139,8 +139,7 @@ def spoofed_answer(answer, domain, IP):
 def main_loop(udps):
     while True:
         data, addr, type, domain, answer = receiveData(udps)
-        ip = get_spoofed_IP(domain, addr)
-        if type == "A" and ip:
+        if type == "A" and (ip := get_spoofed_IP(domain, addr)):
             print("Answering with %s" % ip)
             answer = spoofed_answer(answer, domain, ip)
             sendData(udps, addr, answer)
