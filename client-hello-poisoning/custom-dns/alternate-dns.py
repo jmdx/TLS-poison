@@ -90,7 +90,7 @@ def get_spoofed_IP(domain, ip):
     last_ip = ip
 
     for d in HOSTS_LIST:
-        if re.match(d[0], domain.lower()) or True:
+        if re.match(d[0], domain.lower()):
             spoof_count = (spoof_count + 1) % 3
             # The below line will result in the answer switching after 30 seconds,
             # instead of alternating
