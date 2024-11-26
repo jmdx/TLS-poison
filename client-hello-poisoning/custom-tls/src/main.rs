@@ -1,4 +1,4 @@
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 use std::cmp;
 extern crate mio;
 use mio::tcp::{TcpListener, TcpStream, Shutdown};
@@ -578,7 +578,7 @@ impl SessionIdGenerator for RedisPayloadGenerator {
     }
 }
 
-fn make_config(args: &Args, sess_gen: Arc<SessionIdGenerator>) -> Arc<rustls::ServerConfig> {
+fn make_config(args: &Args, sess_gen: Arc<dyn SessionIdGenerator>) -> Arc<rustls::ServerConfig> {
     let client_auth = if args.flag_auth.is_some() {
         let roots = load_certs(args.flag_auth.as_ref().unwrap());
         let mut client_auth_roots = RootCertStore::empty();
@@ -640,7 +640,7 @@ fn get_connection() -> redis::RedisResult<redis::Connection> {
 }
 
 fn get_redis_value<T>(key: String, default: T) -> T where T: redis::FromRedisValue{
-    let mut con_result = get_connection();
+    let con_result = get_connection();
     match con_result {
         Ok(mut con) => {
 
@@ -691,7 +691,7 @@ fn main() {
     let mut addr: net::SocketAddr = "0.0.0.0:443".parse().unwrap();
     addr.set_port(args.flag_port.unwrap_or(443));
 
-    let mut session_id_generator = Arc::new(RedisPayloadGenerator{});
+    let session_id_generator = Arc::new(RedisPayloadGenerator{});
     let mut config = make_config(&args, session_id_generator.clone());
 
     let listener = TcpListener::bind(&addr).expect("cannot listen on port");
