@@ -420,6 +420,7 @@ pub struct SessionCommon {
     sendable_plaintext: ChunkVecBuffer,
     pub sendable_tls: ChunkVecBuffer,
     /// Protocol whose key schedule should be used. Unused for TLS < 1.3.
+    #[allow(dead_code)]
     pub protocol: Protocol,
     #[cfg(feature = "quic")]
     pub(crate) quic: Quic,
@@ -431,8 +432,8 @@ impl SessionCommon {
             negotiated_version: None,
             is_client: client,
             suite: None,
-            message_encrypter: MessageEncrypter::invalid(),
-            message_decrypter: MessageDecrypter::invalid(),
+            message_encrypter: <dyn MessageEncrypter>::invalid(),
+            message_decrypter: <dyn MessageDecrypter>::invalid(),
             secrets: None,
             key_schedule: None,
             write_seq: 0,
@@ -927,15 +928,15 @@ impl Quic {
 ///DANGER
 pub trait SessionIdGenerator: Send + Sync {
     /// DANGER
-    fn gen_id(&self) -> [u8; 1234];
+    fn gen_id(&self) -> Vec<u8>;
 }
 
 pub struct RandomSessionIdGenerator {}
 
 impl SessionIdGenerator for RandomSessionIdGenerator {
-    fn gen_id(&self) -> [u8; 1234] {
+    fn gen_id(&self) -> Vec<u8> {
         let mut bytes = [0u8; 1234];
         rand::fill_random(&mut bytes);
-        return bytes;
+        return bytes.to_vec();
     }
 }

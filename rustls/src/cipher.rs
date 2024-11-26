@@ -39,13 +39,13 @@ const TLS12_AAD_SIZE: usize = 8 + 1 + 2 + 2;
 fn make_tls12_aad(seq: u64,
                   typ: ContentType,
                   vers: ProtocolVersion,
-                  len: usize) -> ring::aead::Aad<[u8; TLS12_AAD_SIZE]> {
+                  len: usize) -> aead::Aad<[u8; TLS12_AAD_SIZE]> {
     let mut out = [0; TLS12_AAD_SIZE];
     codec::put_u64(seq, &mut out[0..]);
     out[8] = typ.get_u8();
     codec::put_u16(vers.get_u16(), &mut out[9..]);
     codec::put_u16(len as u16, &mut out[11..]);
-    ring::aead::Aad::from(out)
+    aead::Aad::from(out)
 }
 
 /// Make a `MessageCipherPair` based on the given supported ciphersuite `scs`,
@@ -244,10 +244,10 @@ impl GCMMessageDecrypter {
 }
 
 /// A TLS 1.3 write or read IV.
-pub(crate) struct Iv([u8; ring::aead::NONCE_LEN]);
+pub(crate) struct Iv([u8; aead::NONCE_LEN]);
 
 impl Iv {
-    pub(crate) fn new(value: [u8; ring::aead::NONCE_LEN]) -> Self {
+    pub(crate) fn new(value: [u8; aead::NONCE_LEN]) -> Self {
         Self(value)
     }
 
@@ -291,8 +291,8 @@ fn unpad_tls13(v: &mut Vec<u8>) -> ContentType {
     }
 }
 
-fn make_tls13_nonce(iv: &Iv, seq: u64) -> ring::aead::Nonce {
-    let mut nonce = [0u8; ring::aead::NONCE_LEN];
+fn make_tls13_nonce(iv: &Iv, seq: u64) -> aead::Nonce {
+    let mut nonce = [0u8; aead::NONCE_LEN];
     codec::put_u64(seq, &mut nonce[4..]);
 
     nonce.iter_mut().zip(iv.0.iter()).for_each(|(nonce, iv)| {
@@ -302,8 +302,8 @@ fn make_tls13_nonce(iv: &Iv, seq: u64) -> ring::aead::Nonce {
     aead::Nonce::assume_unique_for_key(nonce)
 }
 
-fn make_tls13_aad(len: usize) -> ring::aead::Aad<[u8; 1 + 2 + 2]>{
-    ring::aead::Aad::from([
+fn make_tls13_aad(len: usize) -> aead::Aad<[u8; 1 + 2 + 2]>{
+    aead::Aad::from([
         0x17, // ContentType::ApplicationData
         0x3, // ProtocolVersion (major)
         0x3, // ProtocolVersion (minor)

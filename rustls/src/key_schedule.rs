@@ -54,7 +54,7 @@ impl SecretKind {
 /// own lineage of keys over successive key updates.
 pub struct KeySchedule {
     current: hkdf::Prk,
-    algorithm: ring::hkdf::Algorithm,
+    algorithm: hkdf::Algorithm,
     pub current_client_traffic_secret: Option<hkdf::Prk>,
     pub current_server_traffic_secret: Option<hkdf::Prk>,
     pub current_exporter_secret: Option<hkdf::Prk>,

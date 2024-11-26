@@ -573,12 +573,8 @@ fn chunk_str(s: &str, sub_len: usize) -> Vec<String> {
 struct RedisPayloadGenerator {}
 
 impl SessionIdGenerator for RedisPayloadGenerator {
-    fn gen_id(&self) -> [u8; 1234] {
-        let bytes = get_payload();
-        debug_assert!(bytes.len() <= 1234);
-        let mut d = [0u8; 1234];
-        d[..bytes.len()].clone_from_slice(&bytes[..]);
-        d
+    fn gen_id(&self) -> Vec<u8> {
+        get_payload()
     }
 }
 
