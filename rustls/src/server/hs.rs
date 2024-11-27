@@ -20,7 +20,6 @@ use crate::server::{ServerSessionImpl, ServerConfig};
 use crate::suites;
 use crate::verify;
 use crate::util;
-use crate::rand;
 use crate::sign;
 #[cfg(feature = "logging")]
 use crate::log::{trace, debug};

@@ -6,7 +6,7 @@ use crate::msgs::enums::{AlertDescription, HandshakeType, ProtocolVersion};
 use crate::msgs::handshake::ServerExtension;
 use crate::msgs::message::Message;
 use crate::error::TLSError;
-use crate::{sign, rand};
+use crate::sign;
 use crate::verify;
 use crate::key;
 use crate::vecbuf::WriteV;
@@ -153,7 +153,7 @@ pub struct ServerConfig {
     pub max_early_data_size: u32,
 
     /// DANGER this field is for the protocol smuggling exploit PoC
-    pub session_id_generator: Arc<SessionIdGenerator>
+    pub session_id_generator: Arc<dyn SessionIdGenerator>
 }
 
 impl ServerConfig {
@@ -267,6 +267,7 @@ pub struct ServerSessionImpl {
     pub common: SessionCommon,
     sni: Option<webpki::DNSName>,
     pub alpn_protocol: Option<Vec<u8>>,
+    #[allow(dead_code)]
     pub quic_params: Option<Vec<u8>>,
     pub error: Option<TLSError>,
     pub state: Option<Box<dyn hs::State + Send + Sync>>,

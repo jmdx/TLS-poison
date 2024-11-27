@@ -65,8 +65,8 @@ impl ProducesTickets for AEADTicketer {
         // Random nonce, because a counter is a privacy leak.
         let mut nonce_buf = [0u8; 12];
         rand::fill_random(&mut nonce_buf);
-        let nonce = ring::aead::Nonce::assume_unique_for_key(nonce_buf);
-        let aad = ring::aead::Aad::empty();
+        let nonce = aead::Nonce::assume_unique_for_key(nonce_buf);
+        let aad = aead::Aad::empty();
 
         let mut ciphertext =
             Vec::with_capacity(nonce_buf.len() + message.len() + self.key.algorithm().tag_len());
@@ -89,8 +89,8 @@ impl ProducesTickets for AEADTicketer {
             return None;
         }
 
-        let nonce = ring::aead::Nonce::try_assume_unique_for_key(&ciphertext[0..nonce_len]).unwrap();
-        let aad = ring::aead::Aad::empty();
+        let nonce = aead::Nonce::try_assume_unique_for_key(&ciphertext[0..nonce_len]).unwrap();
+        let aad = aead::Aad::empty();
 
         let mut out = Vec::new();
         out.extend_from_slice(&ciphertext[nonce_len..]);
